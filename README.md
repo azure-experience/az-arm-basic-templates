@@ -30,6 +30,7 @@ To push these ARM templates to our Azure environment, we will rely on **PowerShe
 |**Azure Subscription**|Pay-as-you-go|
 |**Subscription Name**|_nags-azure-subscription_|
 |**Resource Group Name**|_azure-lab-rg-01_|
+|**Powershell Cmdlet**|_New-AzResourceGroupDeployment_|
 
 Check your Powershell environment:
 
