@@ -11,8 +11,19 @@ Brief walkthrough on the ARM templates used by the beginners
 ### Usage of exported templates
 ### Usage of quick start templates
 ### Resource creation with tags
-### External parameter usage for resources
+### [External parameter file usage for resources](#external_parameters_reference)
 
 ---
 
 ### <a name="introduction"></a>ARM Template Format
+...
+
+
+...
+
+
+...
+
+
+
+### <a name="external_parameters_reference"></a>External parameter file usage for resources
