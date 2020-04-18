@@ -1,0 +1,128 @@
+{
+ "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+ "contentVersion": "1.0.0.0",
+ "parameters": {
+   "mystoragePrefix": {
+     "type": "string",
+     "minLength": 2,
+     "maxLength": 12
+   },
+   "storageSKU": {
+     "type": "string",
+     "defaultValue": "Standard_LRS",
+     "allowedValues": [
+       "Standard_LRS",
+       "Standard_GRS",
+       "Standard_GZRS",
+       "Standard_RAGZRS"
+     ]
+   },
+   "location": {
+     "type": "string",
+     "defaultValue": "[resourceGroup().location]",
+     "allowedValues": [
+       "southindia",
+       "centralindia",
+       "westindia"
+     ]
+   },
+   "vnet_name": {
+      "defaultValue": "az-lab-vnet-creation",
+      "type": "String"
+   }         
+ },
+ "variables": {
+    "uniqueStorageName": "[concat(parameters('mystoragePrefix'), uniqueString(resourceGroup().id))]",
+    "vnetName": "[parameters('vnet_name')]"
+ },
+ "resources": [
+   {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2019-04-01",
+      "name": "[variables('uniqueStorageName')]",
+      "tags": {"location": "[parameters('location')]"},
+      "location": "[parameters('location')]",
+      "sku": {
+         "name": "[parameters('storageSKU')]" 
+      },
+      "kind": "StorageV2",
+      "properties": {
+         "supportsHttpsTrafficOnly": true
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2019-11-01",
+      "name": "[variables('vnetName')]",
+      "tags": {"location": "[parameters('location')]"},
+      "location": "[parameters('location')]",
+      "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+                "10.5.0.0/16"
+            ]
+          },
+          "subnets": [
+            {
+              "name": "subnetA",
+              "properties": {
+                  "addressPrefix": "10.5.0.0/24",
+                  "delegations": [],
+                  "privateEndpointNetworkPolicies": "Enabled",
+                  "privateLinkServiceNetworkPolicies": "Enabled"
+                }
+              }
+              ],
+              "virtualNetworkPeerings": [],
+              "enableDdosProtection": false,
+              "enableVmProtection": false
+          }
+        },
+        {
+          "type": "Microsoft.Network/virtualNetworks/subnets",
+          "apiVersion": "2019-11-01",
+          "name": "[concat(variables('vnetName'), '/subnetA')]",
+          "dependsOn": [
+              "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]"
+          ],
+          "properties": {
+            "addressPrefix": "10.5.0.0/24",
+            "delegations": [],
+              "privateEndpointNetworkPolicies": "Enabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+          }
+        }
+ ],
+ "outputs": {
+   "storageEndpoint":{
+      "type": "object",
+      //"value": "[reference(variables('uniqueStorageName'))]" ==> this gives the complete output from storage account creation; you need to capture one output pertaining to object type
+      //"value": "[reference(variables('uniqueStorageName')).primaryEndpoints]"
+      "value": "[reference(variables('uniqueStorageName')).encryption]"
+   },
+   "storageStatus": {
+      "type": "string",
+      //"value": "[reference(variables('uniqueStorageName'))]" ==> this gives the complete output from storage account creation; you need to capture one output pertaining to a string type
+      //"value": "[reference(variables('uniqueStorageName')).creationTime]",
+      "value": "[reference(variables('uniqueStorageName')).statusOfPrimary]"
+    },
+    "CreationTime": {
+      "type": "string",
+      //"value": "[reference(variables('uniqueStorageName'))]" ==> this gives the complete output from storage account creation; you need to capture one output pertaining to a string type
+      "value": "[reference(variables('uniqueStorageName')).creationTime]"
+      },
+    "VnetAddrSpace": {
+      "type": "object",
+      //"value": "[reference(variables('vnetName'))]" ==> gives the info on vnet account; drill down to get other info on addressPrefix & subnet
+      "value": "[reference(variables('vnetName')).addressSpace]"
+    },
+    "VnetSubnet": {
+      "type": "array",
+      "value": "[reference(variables('vnetName')).subnets]"
+      },
+    "VnetPeeringInfo": {
+      "type": "array",
+      "value": "[reference(variables('vnetName')).virtualNetworkPeerings]"
+      }
+    }  
+ }
