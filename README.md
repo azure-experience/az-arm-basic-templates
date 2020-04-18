@@ -15,4 +15,4 @@ Brief walkthrough on the ARM templates used by the beginners
 
 ---
 
-### <a href="introduction"></a>ARM Template Format
+### introduction
