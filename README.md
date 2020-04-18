@@ -27,9 +27,9 @@ To push these ARM templates to our Azure environment, we will rely on **PowerShe
 
 |Property|Definition|
 |---|---|
-|Azure Subscription|Pay-as-you-go|
-|Subscription Name|nags-azure-subscription|
-|Resource Group Name|azure-lab-rg-01|
+|**Azure Subscription**|Pay-as-you-go|
+|**Subscription Name**|_nags-azure-subscription_|
+|**Resource Group Name**|_azure-lab-rg-01_|
 
 Check your Powershell environment:
 
