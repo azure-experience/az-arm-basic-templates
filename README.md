@@ -2,7 +2,7 @@
 Brief walkthrough on the ARM templates used by the beginners
 
 ## Index for different user-cases
-### [Brief Introduction](#introduction)
+### [Brief Introduction](#before-we-start)
 ### Creation of a resource
 ### Creation of a resource with a parameter
 ### Creation of a resource using functions
@@ -22,7 +22,7 @@ Brief walkthrough on the ARM templates used by the beginners
 --
 
 
-### <a name="introduction"></a>Brief Introduction
+### <a name="before-we-start"></a>Brief Introduction
 To push these ARM templates to our Azure environment, we will rely on **PowerShell** & have the following **Azure Subscription details**, ready before we kick-off.
 
 |Property|Definition|
