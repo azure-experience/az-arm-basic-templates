@@ -2,7 +2,7 @@
 Brief walkthrough on the ARM templates used by the beginners
 
 ## Index for different user-cases
-### [ARM Template format](#introduction)
+### [Brief Introduction](#introduction)
 ### Creation of a resource
 ### Creation of a resource with a parameter
 ### Creation of a resource using functions
@@ -22,7 +22,15 @@ Brief walkthrough on the ARM templates used by the beginners
 --
 
 
-### <a name="introduction"></a>ARM Template Format
+### <a name="introduction"></a>Brief Introduction
+To push these ARM templates, we will rely on **PowerShell** & have the following **Azure Subscription details.**
+
+|Property|Definition|
+|---|---|
+|Azure Subscription|Pay-as-you-go|
+|Subscription Id|name|
+|Resource Group Name|resource group name|
+
 ...
 
 
