@@ -23,15 +23,26 @@ Brief walkthrough on the ARM templates used by the beginners
 
 
 ### <a name="introduction"></a>Brief Introduction
-To push these ARM templates, we will rely on **PowerShell** & have the following **Azure Subscription details.**
+To push these ARM templates to our Azure environment, we will rely on **PowerShell** & have the following **Azure Subscription details**, ready before we kick-off.
 
 |Property|Definition|
 |---|---|
 |Azure Subscription|Pay-as-you-go|
-|Subscription Id|name|
-|Resource Group Name|resource group name|
+|Subscription Name|nags-azure-subscription|
+|Resource Group Name|azure-lab-rg-01|
 
-...
+Check your Powershell environment:
+
+```
+PS C:\WINDOWS\system32> (Get-AzContext).Subscription.Name
+nags-azure-subscription
+
+PS C:\WINDOWS\system32> (Get-AzContext).Subscription.id
+XXXXXXXXX-YYYY-ABCD-EFGH-ABCDEFXYZ722
+
+PS C:\WINDOWS\system32> (Get-AzContext).Subscription.State
+Enabled
+```
 
 
 ...
