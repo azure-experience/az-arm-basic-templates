@@ -13,7 +13,14 @@ Brief walkthrough on the ARM templates used by the beginners
 ### Resource creation with tags
 ### [External parameter file usage for resources](#external_parameters_reference)
 
----
+--
+--
+--
+--
+--
+--
+--
+
 
 ### <a name="introduction"></a>ARM Template Format
 ...
