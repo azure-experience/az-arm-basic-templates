@@ -25,7 +25,7 @@ Brief walkthrough on the ARM templates used by the beginners
 ### <a name="before-we-start"></a>1. Brief Introduction (_Before you start_)
 To push these ARM templates to our Azure environment, we will rely on **PowerShell** & have the following **Azure Subscription details**, ready before we kick-off. 
 
-:memo: Pointer:
+:memo: **Pointer:**
 
 I have shown the simulations for my subscription name. Feel free to use your subscription too :blush:
 
