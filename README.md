@@ -3,8 +3,8 @@ Brief walkthrough on the ARM templates used by the beginners
 
 ## Index for different user-cases
 ### [Brief Introduction _(Before you start)_](#before-we-start)
-### [Creation of a resource](#resource-creation)
-### Creation of a resource with a parameter
+### [Resource creation](#resource-creation)
+### [Resource creation with parameters]
 ### Creation of a resource using functions
 ### Creation of a resource using variables
 ### How to get output for your ARM templates?
@@ -71,7 +71,7 @@ What if: Performing the operation "Creating Deployment" on target "azure-lab-rg-
 ### <a name="resource-creation"></a>Resource creation
 |Property|Definition|
 |---|---|
-|Folder|2-resource-creation|
+|Folder|[2-resource-creation](#2-resource-creation)|
 |File|_azuredeploy.json_|
 
 Run this command to create a simple **storageaccount** in your resource group
