@@ -62,8 +62,10 @@ PS C:\WINDOWS\system32> help New-AzResourceGroupDeployment -ShowWindow
 You can define your configuration within the _azuredeploy.json_ file, navigate to the folder where its stored, and then invoke the "WhatIf" parameter to get a preview on the consequences of running the cmdlet (a dry run)
 
 ```
-PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\1-foundation-arm-creation> New-AzResourceGroupDeployment \
--Name "filecheck" -ResourceGroupName "azure-lab-rg-01"  -TemplateFile .\azuredeploy.json -Verbose -WhatIf
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\1-foundation-arm-creation> 
+New-AzResourceGroupDeployment -Name "filecheck" -ResourceGroupName "azure-lab-rg-01" \
+-TemplateFile .\azuredeploy.json -Verbose -WhatIf
+
 What if: Performing the operation "Creating Deployment" on target "azure-lab-rg-01".
 
 ```
@@ -78,8 +80,9 @@ Run this command to create a simple **storageaccount** in your resource group
 
 **Command:**
 ```
-PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\2-resource-creation> New-AzResourceGroupDeployment \
--Name "createresource" -ResourceGroupName "azure-lab-rg-01"  -TemplateFile .\azuredeploy.json -verbose
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\2-resource-creation> 
+New-AzResourceGroupDeployment -Name "createresource" -ResourceGroupName "azure-lab-rg-01" \
+-TemplateFile .\azuredeploy.json -verbose
 ```
 
 **Output:**
@@ -111,9 +114,9 @@ Run this command to create a simple **storageaccount** by using a custom file: _
 
 **Command:**
 ```
-PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\3-resource-creation-with-parameter> New-AzResourceGroupDeployment \
--Name "resourcewithparameter" -ResourceGroupName "azure-lab-rg-01"  -TemplateFile .\azuredeploy-with-config-params.json \
--verbose
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\3-resource-creation-with-parameter> 
+New-AzResourceGroupDeployment -Name "resourcewithparameter" -ResourceGroupName "azure-lab-rg-01" \
+-TemplateFile .\azuredeploy-with-config-params.json -Verbose
 ```
 
 **Output:**
@@ -151,8 +154,9 @@ Run this command to create a simple **storageaccount** by using in-built ARM fun
 
 **Command:**
 ```
-PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\4-resource-creation-with-functions> New-AzResourceGroupDeployment \
--Name "createresourcewithfunctions" -ResourceGroupName "azure-lab-rg-01"  -TemplateFile .\azuredeploy.json -verbose
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\4-resource-creation-with-functions>
+New-AzResourceGroupDeployment -Name "createresourcewithfunctions" -ResourceGroupName "azure-lab-rg-01" \
+-TemplateFile .\azuredeploy.json -verbose
 ```
 
 **Output:**
@@ -190,9 +194,9 @@ Run this command to create a simple **storageaccount** by using a custom input f
 
 **Command:**
 ```
-PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\5-resource-creation-with-variables> New-AzResourceGroupDeployment \
--Name "createresourcewithvariables" -ResourceGroupName "azure-lab-rg-01" -mystoragePrefix "azstorage" \
--TemplateFile .\azuredeploy.json -Verbose
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\5-resource-creation-with-variables>
+New-AzResourceGroupDeployment -Name "createresourcewithvariables" -ResourceGroupName "azure-lab-rg-01" \
+-mystoragePrefix "azstorage" -TemplateFile .\azuredeploy.json -Verbose
 ```
 
 **Output:**
@@ -232,9 +236,9 @@ The below command helps to create output associated with your storage account.(e
 
 **Command:**
 ```
-PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\6-resource-creation-with-output> New-AzResourceGroupDeployment \
--Name "createresourcewithoutput" -ResourceGroupName "azure-lab-rg-01" -mystoragePrefix "azstorage" \
--TemplateFile .\azuredeploy.json -Verbose
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\6-resource-creation-with-output>
+New-AzResourceGroupDeployment -Name "createresourcewithoutput" -ResourceGroupName "azure-lab-rg-01" \
+-mystoragePrefix "azstorage" -TemplateFile .\azuredeploy.json -Verbose
 ```
 
 **Output:**
@@ -291,9 +295,9 @@ The below command helps to create both the **storage account & a virtual network
 
 **Command:**
 ```
-PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\7-resource-creation-with-exported-template> New-AzResourceGroupDeployment \
--Name "createresourcewithexportedtemplate" -ResourceGroupName "azure-lab-rg-01" -mystoragePrefix "azstorage" \
--TemplateFile .\azuredeploy-converged.json -Verbose
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\7-resource-creation-with-exported-template>
+New-AzResourceGroupDeployment -Name "createresourcewithexportedtemplate" -ResourceGroupName "azure-lab-rg-01" \
+-mystoragePrefix "azstorage" -TemplateFile .\azuredeploy-converged.json -Verbose
 ```
 
 **Output:**
@@ -376,9 +380,9 @@ The below command helps to create both the **storage account & a web-site** simu
 
 **Command:**
 ```
-PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\8-resource-creation-with-quick-template> New-AzResourceGroupDeployment \
--Name "createresourcewithquickstarttemplate" -ResourceGroupName "azure-lab-rg-01" -mystoragePrefix "azstorage" \
--TemplateFile .\azuredeploy.json -Verbose
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\8-resource-creation-with-quick-template>
+New-AzResourceGroupDeployment -Name "createresourcewithquickstarttemplate" -ResourceGroupName "azure-lab-rg-01" \
+-mystoragePrefix "azstorage" -TemplateFile .\azuredeploy.json -Verbose
 ```
 
 **Output:**
@@ -434,9 +438,9 @@ The below command helps to create both the **storage account & a web-site** simu
 
 **Command:**
 ```
-PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\9-resource-creation-with-tags> New-AzResourceGroupDeployment \
--Name "createresourcewithtags" -ResourceGroupName "azure-lab-rg-01" -mystoragePrefix "azstorage" \
--TemplateFile .\azuredeploy.json -Verbose
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\9-resource-creation-with-tags> 
+New-AzResourceGroupDeployment -Name "createresourcewithtags" -ResourceGroupName "azure-lab-rg-01" \
+-mystoragePrefix "azstorage" -TemplateFile .\azuredeploy.json -Verbose
 ```
 
 **Output:**
