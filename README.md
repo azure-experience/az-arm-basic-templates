@@ -9,7 +9,7 @@ Brief walkthrough on the ARM templates used by the beginners
 ### [Resource creation with variables](#resource-creation-variables)
 ### [How to get output for your ARM templates?](#arm-generate-output)
 ### [Usage of exported templates](#exported-templates)
-### Usage of quick start templates
+### [Usage of quick start templates](#quick-start-templates)
 ### Resource creation with tags
 ### [External parameter file usage for resources](#external_parameters_reference)
 
@@ -360,6 +360,64 @@ Outputs                 :
                             }
                           ]
                           vnetPeeringInfo    Array                      []
+
+DeploymentDebugLogLevel :
+```
+
+### <a name="quick-start-templates"></a>Usage of quick start templates
+|Property|Definition|
+|---|---|
+|Folder|[8-resource-creation-with-quick-template](./8-resource-creation-with-quick-template)|
+|File|_azuredeploy.json_|
+
+We can always rely on the "quick-start" templated already provided for Azure resources (within github). It could save you a lot of configuration time and speed up new resource creation of any flavor.
+
+The below command helps to create both the **storage account & a web-site** simultaneously
+
+**Command:**
+```
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\8-resource-creation-with-quick-template> New-AzResourceGroupDeployment \
+-Name "createresourcewithquickstarttemplate" -ResourceGroupName "azure-lab-rg-01" -mystoragePrefix "azstorage" \
+-TemplateFile .\azuredeploy.json -Verbose
+```
+
+**Output:**
+```
+VERBOSE: Performing the operation "Creating Deployment" on target "azure-lab-rg-01".
+VERBOSE: 17:38:01 - Template is valid.
+VERBOSE: 17:38:03 - Create template deployment 'createresourcewithquickstarttemplate'
+VERBOSE: 17:38:14 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is running
+VERBOSE: 17:38:33 - Resource Microsoft.Web/serverfarms 'exampleplan' provisioning status is succeeded
+VERBOSE: 17:38:38 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is succeeded
+VERBOSE: 17:38:44 - Resource Microsoft.Web/sites 'demoappbxmueijtaz47c' provisioning status is succeeded
+
+DeploymentName          : createresourcewithquickstarttemplate
+ResourceGroupName       : azure-lab-rg-01
+ProvisioningState       : Succeeded
+Timestamp               : 18-04-2020 12:08:44
+Mode                    : Incremental
+TemplateLink            :
+Parameters              :
+                          Name                  Type                       Value
+                          ====================  =========================  ==========
+                          mystoragePrefix       String                     azstorage
+                          storageSKU            String                     Standard_LRS
+                          location              String                     southindia
+                          appServicePlanName    String                     exampleplan
+                          webAppName            String                     demoapp
+                          linuxFxVersion        String                     php|7.0
+
+Outputs                 :
+                          Name               Type                       Value
+                          =================  =========================  ==========
+                          storageEndpoint    Object                     {
+                            "dfs": "https://azstoragebxmueijtaz47c.dfs.core.windows.net/",
+                            "web": "https://azstoragebxmueijtaz47c.z30.web.core.windows.net/",
+                            "blob": "https://azstoragebxmueijtaz47c.blob.core.windows.net/",
+                            "queue": "https://azstoragebxmueijtaz47c.queue.core.windows.net/",
+                            "table": "https://azstoragebxmueijtaz47c.table.core.windows.net/",
+                            "file": "https://azstoragebxmueijtaz47c.file.core.windows.net/"
+                          }
 
 DeploymentDebugLogLevel :
 ```
