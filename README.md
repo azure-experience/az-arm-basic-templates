@@ -10,7 +10,7 @@ Brief walkthrough on the ARM templates used by the beginners
 ### [How to get output for your ARM templates?](#arm-generate-output)
 ### [Usage of exported templates](#exported-templates)
 ### [Usage of quick start templates](#quick-start-templates)
-### Resource creation with tags
+### [Resource creation with tags](#resource-creation-tags)
 ### [External parameter file usage for resources](#external_parameters_reference)
 
 --
@@ -406,6 +406,69 @@ Parameters              :
                           appServicePlanName    String                     exampleplan
                           webAppName            String                     demoapp
                           linuxFxVersion        String                     php|7.0
+
+Outputs                 :
+                          Name               Type                       Value
+                          =================  =========================  ==========
+                          storageEndpoint    Object                     {
+                            "dfs": "https://azstoragebxmueijtaz47c.dfs.core.windows.net/",
+                            "web": "https://azstoragebxmueijtaz47c.z30.web.core.windows.net/",
+                            "blob": "https://azstoragebxmueijtaz47c.blob.core.windows.net/",
+                            "queue": "https://azstoragebxmueijtaz47c.queue.core.windows.net/",
+                            "table": "https://azstoragebxmueijtaz47c.table.core.windows.net/",
+                            "file": "https://azstoragebxmueijtaz47c.file.core.windows.net/"
+                          }
+
+DeploymentDebugLogLevel :
+```
+
+### <a name="resource-creation-tags"></a>Resource creation with tags
+|Property|Definition|
+|---|---|
+|Folder|[9-resource-creation-with-tags](./9-resource-creation-with-tags)|
+|File|_azuredeploy.json_|
+
+Creation of tags is a very important step to "group or cluster" your AZ resources. It can help you keep an eye on the cost & also various departments to which that resource could be allocated.
+
+The below command helps to create both the **storage account & a web-site** simultaneously with **the tags defined** in the template file
+
+**Command:**
+```
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\9-resource-creation-with-tags> New-AzResourceGroupDeployment \
+-Name "createresourcewithtags" -ResourceGroupName "azure-lab-rg-01" -mystoragePrefix "azstorage" \
+-TemplateFile .\azuredeploy.json -Verbose
+```
+
+**Output:**
+```
+VERBOSE: Performing the operation "Creating Deployment" on target "azure-lab-rg-01".
+VERBOSE: 17:42:07 - Template is valid.
+VERBOSE: 17:42:09 - Create template deployment 'createresourcewithtags'
+VERBOSE: 17:42:14 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is running
+VERBOSE: 17:42:32 - Resource Microsoft.Web/serverfarms 'exampleplan' provisioning status is succeeded
+VERBOSE: 17:42:44 - Resource Microsoft.Web/sites 'demoappbxmueijtaz47c' provisioning status is succeeded
+VERBOSE: 17:50:42 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is succeeded
+
+
+DeploymentName          : createresourcewithtags
+ResourceGroupName       : azure-lab-rg-01
+ProvisioningState       : Succeeded
+Timestamp               : 18-04-2020 12:20:38
+Mode                    : Incremental
+TemplateLink            :
+Parameters              :
+                          Name                  Type                       Value
+                          ====================  =========================  ==========
+                          mystoragePrefix       String                     azstorage
+                          storageSKU            String                     Standard_LRS
+                          location              String                     southindia
+                          appServicePlanName    String                     exampleplan
+                          webAppName            String                     demoapp
+                          linuxFxVersion        String                     php|7.0
+                          resourceTags          Object                     {
+                            "environment": "dev",
+                            "lab-simulation": "arm-template-creation"
+                          }
 
 Outputs                 :
                           Name               Type                       Value
