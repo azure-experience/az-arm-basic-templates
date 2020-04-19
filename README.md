@@ -11,7 +11,7 @@ Brief walkthrough on the ARM templates used by the beginners
 ### [7. Usage of exported templates](#exported-templates)
 ### [8. Usage of quick start templates](#quick-start-templates)
 ### [9. Resource creation with tags](#resource-creation-tags)
-### [10. External parameter file usage for resources](#external_parameters_reference)
+### [10. External parameter file usage for resources](#external-parameters-reference)
 
 --
 --
@@ -485,67 +485,118 @@ Outputs                 :
 DeploymentDebugLogLevel :
 ```
 
-### <a name="resource-creation-tags"></a>10. Resource creation with tags
+### <a name="external-parameters-reference"></a>10. External parameter file usage for resources
 |Property|Definition|
 |---|---|
-|Folder|[9-resource-creation-with-tags](./9-resource-creation-with-tags)|
+|Folder|[10-resource-creation-with-external-parameters](./10-resource-creation-with-external-parameters)|
 |File|_azuredeploy.json_|
+|ParameterFile|_azuredeploy.parameters.dev.json_|
 
-Creation of tags is a very important step to "group or cluster" your AZ resources. It can help you keep an eye on the cost & also various departments to which that resource could be allocated.
+Sometimes it becomes necessary to create multiple AZ resources for different environments. To bring the element of re-usability, we can externalize the parameters (based on environments) & inject them as reference during resource creation
 
-The below command helps to create both the **storage account & a web-site** simultaneously with **the tags defined** in the template file
+The below command helps to create both the **storage account & a web-site** simultaneously with **the template parameterfile for dev** environment
 
 **Command:**
 ```
-PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\9-resource-creation-with-tags> New-AzResourceGroupDeployment \
--Name "createresourcewithtags" -ResourceGroupName "azure-lab-rg-01" -mystoragePrefix "azstorage" \
--TemplateFile .\azuredeploy.json -Verbose
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\10-resource-creation-with-external-parameters>
+New-AzResourceGroupDeployment -Name "createresourcewithexternalparameters" -ResourceGroupName "azure-lab-rg-01" \
+-mystoragePrefix "azstorage" -TemplateFile .\azuredeploy.json \
+-TemplateParameterFile .\azuredeploy.parameters.dev.json -Verbose
 ```
 
 **Output:**
 ```
 VERBOSE: Performing the operation "Creating Deployment" on target "azure-lab-rg-01".
-VERBOSE: 17:42:07 - Template is valid.
-VERBOSE: 17:42:09 - Create template deployment 'createresourcewithtags'
-VERBOSE: 17:42:14 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is running
-VERBOSE: 17:42:32 - Resource Microsoft.Web/serverfarms 'exampleplan' provisioning status is succeeded
-VERBOSE: 17:42:44 - Resource Microsoft.Web/sites 'demoappbxmueijtaz47c' provisioning status is succeeded
-VERBOSE: 17:50:42 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is succeeded
+VERBOSE: 18:17:25 - Template is valid.
+VERBOSE: 18:17:27 - Create template deployment 'createresourcewithexternalparameters'
+VERBOSE: 18:17:33 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is running
+VERBOSE: 18:17:33 - Resource Microsoft.Network/virtualNetworks 'dev12' provisioning status is running
+VERBOSE: 18:17:47 - Resource Microsoft.Network/virtualNetworks/subnets 'dev12/subnet-dev' provisioning status is succeeded
+VERBOSE: 18:17:47 - Resource Microsoft.Network/virtualNetworks 'dev12' provisioning status is succeeded
+VERBOSE: 18:24:30 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is succeeded
 
 
-DeploymentName          : createresourcewithtags
+DeploymentName          : createresourcewithexternalparameters
 ResourceGroupName       : azure-lab-rg-01
 ProvisioningState       : Succeeded
-Timestamp               : 18-04-2020 12:20:38
+Timestamp               : 18-04-2020 12:54:30
 Mode                    : Incremental
 TemplateLink            :
 Parameters              :
-                          Name                  Type                       Value
-                          ====================  =========================  ==========
-                          mystoragePrefix       String                     azstorage
-                          storageSKU            String                     Standard_LRS
-                          location              String                     southindia
-                          appServicePlanName    String                     exampleplan
-                          webAppName            String                     demoapp
-                          linuxFxVersion        String                     php|7.0
-                          resourceTags          Object                     {
+                          Name               Type                       Value
+                          =================  =========================  ==========
+                          mystoragePrefix    String                     azstorage
+                          storageSKU         String                     Standard_LRS
+                          location           String                     southindia
+                          vnet_name          String                     dev12
+                          subnet_name        String                     subnet-dev
+                          allAddrSpaces      Object                     {
+                            "addressPrefixes": [
+                              {
+                                "name": "firstPrefix",
+                                "addressPrefix": "10.7.0.0/16"
+                              },
+                              {
+                                "name": "secondPrefix",
+                                "addressPrefix": "10.8.0.0/16"
+                              }
+                            ],
+                            "subnets": [
+                              {
+                                "name": "firstSubnet",
+                                "addressPrefix": "10.7.0.0/24"
+                              },
+                              {
+                                "name": "secondSubnet",
+                                "addressPrefix": "10.8.0.0/24"
+                              }
+                            ]
+                          }
+                          resourceTags       Object                     {
                             "environment": "dev",
-                            "lab-simulation": "arm-template-creation"
+                            "lab-simulation": "arm-template-creation-dev"
                           }
 
 Outputs                 :
                           Name               Type                       Value
                           =================  =========================  ==========
                           storageEndpoint    Object                     {
-                            "dfs": "https://azstoragebxmueijtaz47c.dfs.core.windows.net/",
-                            "web": "https://azstoragebxmueijtaz47c.z30.web.core.windows.net/",
-                            "blob": "https://azstoragebxmueijtaz47c.blob.core.windows.net/",
-                            "queue": "https://azstoragebxmueijtaz47c.queue.core.windows.net/",
-                            "table": "https://azstoragebxmueijtaz47c.table.core.windows.net/",
-                            "file": "https://azstoragebxmueijtaz47c.file.core.windows.net/"
+                            "services": {
+                              "file": {
+                                "enabled": true,
+                                "lastEnabledTime": "2020-04-18T12:47:30.9451153Z"
+                              },
+                              "blob": {
+                                "enabled": true,
+                                "lastEnabledTime": "2020-04-18T12:47:30.9451153Z"
+                              }
+                            },
+                            "keySource": "Microsoft.Storage"
                           }
+                          storageStatus      String                     available
+                          creationTime       String                     18-04-2020 12:47:30
+                          vnetAddrSpace      Object                     {
+                            "addressPrefixes": [
+                              "10.7.0.0/16",
+                              "10.8.0.0/16"
+                            ]
+                          }
+                          vnetSubnet         Array                      [
+                            {
+                              "name": "subnet-dev",
+                              "id": "/subscriptions/2f981ee7-6c60-4593-bc4b-82c9b050f722/resourceGroups/azure-lab-rg-01/providers/Microsoft.Network/virtualNetworks/dev12/subnets/subnet-dev",
+                              "etag": "W/\"5b18c623-0a25-4172-9727-c5c1432a3b6c\"",
+                              "properties": {
+                                "provisioningState": "Succeeded",
+                                "addressPrefix": "10.7.0.0/24",
+                                "delegations": [],
+                                "privateEndpointNetworkPolicies": "Enabled",
+                                "privateLinkServiceNetworkPolicies": "Enabled"
+                              },
+                              "type": "Microsoft.Network/virtualNetworks/subnets"
+                            }
+                          ]
+                          vnetPeeringInfo    Array                      []
 
 DeploymentDebugLogLevel :
 ```
-
-### <a name="external_parameters_reference"></a>External parameter file usage for resources
