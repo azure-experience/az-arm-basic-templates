@@ -71,7 +71,7 @@ What if: Performing the operation "Creating Deployment" on target "azure-lab-rg-
 ### <a name="resource-creation"></a>Resource creation
 |Property|Definition|
 |---|---|
-|Folder|[2-resource-creation](#2-resource-creation)|
+|Folder|[2-resource-creation](./2-resource-creation)|
 |File|_azuredeploy.json_|
 
 Run this command to create a simple **storageaccount** in your resource group
