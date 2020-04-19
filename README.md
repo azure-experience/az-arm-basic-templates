@@ -3,7 +3,7 @@ Brief walkthrough on the ARM templates used by the beginners
 
 ## Index for different user-cases
 ### [Brief Introduction _(Before you start)_](#before-we-start)
-### [Resource creation](#resource-creation)
+### [Resource creation](#new-resource-creation)
 ### [Resource creation with parameters](#resource-creation-parameters)
 ### Creation of a resource using functions
 ### Creation of a resource using variables
@@ -68,7 +68,7 @@ What if: Performing the operation "Creating Deployment" on target "azure-lab-rg-
 
 ```
 
-### <a name="resource-creation"></a>Resource creation
+### <a name="new-resource-creation"></a>Resource creation
 |Property|Definition|
 |---|---|
 |Folder|[2-resource-creation](./2-resource-creation)|
