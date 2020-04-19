@@ -2,7 +2,7 @@
 Brief walkthrough on the ARM templates used by the beginners
 
 ## Index for different user-cases
-### [Brief Introduction](#before-we-start)
+### [Brief Introduction _(Before you start)_](#before-we-start)
 ### [Creation of a resource](#resource-creation)
 ### Creation of a resource with a parameter
 ### Creation of a resource using functions
@@ -22,7 +22,7 @@ Brief walkthrough on the ARM templates used by the beginners
 --
 
 
-### <a name="before-we-start"></a>Brief Introduction
+### <a name="before-we-start"></a>Brief Introduction (_Before you start_)
 To push these ARM templates to our Azure environment, we will rely on **PowerShell** & have the following **Azure Subscription details**, ready before we kick-off. 
 
 :memo: Pointer:
@@ -54,8 +54,12 @@ Before we create a new resource (within our resource group) using: _New-AzResour
 ```
 PS C:\WINDOWS\system32> help New-AzResourceGroupDeployment -ShowWindow
 ```
+|Property|Definition|
+|---|---|
+|Folder|1-foundation-arm-creation|
+|File|_azuredeploy.json_|
 
-Additionally, you can define your configuration within the _azuredeploy.json_ file, navigate to the folder where its stored, and then invoke the "WhatIf" parameter to get a preview on the consequences of running the cmdlet (a dry run)
+You can define your configuration within the _azuredeploy.json_ file, navigate to the folder where its stored, and then invoke the "WhatIf" parameter to get a preview on the consequences of running the cmdlet (a dry run)
 
 ```
 PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\1-foundation-arm-creation> New-AzResourceGroupDeployment \
@@ -67,7 +71,40 @@ What if: Performing the operation "Creating Deployment" on target "azure-lab-rg-
 ### <a name="resource-creation"></a>Resource creation
 |Property|Definition|
 |---|---|
-|Folder|
+|Folder|2-resource-creation|
+|File|_azuredeploy.json_|
+
+Run this command to create a simple **storageaccount** in your resource group
+
+**Command:**
+```
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\2-resource-creation> New-AzResourceGroupDeployment -Name "createresource" -ResourceGroupName "azure-lab-rg-01"  -TemplateFile .\azuredeploy.json -verbose
+```
+
+**Output:**
+```
+VERBOSE: Performing the operation "Creating Deployment" on target "azure-lab-rg-01".
+VERBOSE: 16:53:23 - Template is valid.
+VERBOSE: 16:53:26 - Create template deployment 'createresource'
+VERBOSE: 16:53:26 - Checking deployment status in 5 seconds
+VERBOSE: 16:53:31 - Checking deployment status in 5 seconds
+VERBOSE: 16:53:37 - Resource Microsoft.Storage/storageAccounts 'storageaccountvsc012' provisioning status is running
+VERBOSE: 16:53:37 - Checking deployment status in 14 seconds
+VERBOSE: 16:53:51 - Checking deployment status in 5 seconds
+VERBOSE: 16:53:57 - Resource Microsoft.Storage/storageAccounts 'storageaccountvsc012' provisioning status is succeeded
+
+
+DeploymentName          : createresource
+ResourceGroupName       : azure-lab-rg-01
+ProvisioningState       : Succeeded
+Timestamp               : 18-04-2020 11:23:53
+Mode                    : Incremental
+TemplateLink            :
+Parameters              :
+Outputs                 :
+DeploymentDebugLogLevel :
+```
+
 
 
 ...
