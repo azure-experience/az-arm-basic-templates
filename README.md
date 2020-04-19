@@ -56,7 +56,7 @@ PS C:\WINDOWS\system32> help New-AzResourceGroupDeployment -ShowWindow
 ```
 |Property|Definition|
 |---|---|
-|Folder|1-foundation-arm-creation|
+|Folder|[1-foundation-arm-creation](./1-foundation-arm-creation)|
 |File|_azuredeploy.json_|
 
 You can define your configuration within the _azuredeploy.json_ file, navigate to the folder where its stored, and then invoke the "WhatIf" parameter to get a preview on the consequences of running the cmdlet (a dry run)
