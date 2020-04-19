@@ -7,7 +7,7 @@ Brief walkthrough on the ARM templates used by the beginners
 ### [Resource creation with parameters](#resource-creation-parameters)
 ### [Resource creation with functions](#resource-creation-functions)
 ### [Resource creation with variables](#resource-creation-variables)
-### How to get output for your ARM templates?
+### [How to get output for your ARM templates?](#arm-generate-output)
 ### Usage of exported templates
 ### Usage of quick start templates
 ### Resource creation with tags
@@ -220,5 +220,63 @@ Outputs                 :
 DeploymentDebugLogLevel :
 ```
 
+### <a name="arm-generate-output"></a>How to get output for your ARM templates?
+|Property|Definition|
+|---|---|
+|Folder|[6-resource-creation-with-output](./6-resource-creation-with-output)|
+|File|_azuredeploy.json_|
+
+Sometimes it becomes imperative to know the properties of the resources being created. Hence its essential to generate output & identify the associated properties with the AZ resources. 
+
+The below command helps to create output associated with your storage account.(ex: _encryption, status & storage time_)
+
+**Command:**
+```
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\6-resource-creation-with-output> New-AzResourceGroupDeployment \
+-Name "createresourcewithoutput" -ResourceGroupName "azure-lab-rg-01" -mystoragePrefix "azstorage" \
+-TemplateFile .\azuredeploy.json -Verbose
+```
+
+**Output:**
+```
+VERBOSE: Performing the operation "Creating Deployment" on target "azure-lab-rg-01".
+VERBOSE: 17:15:11 - Template is valid.
+VERBOSE: 17:15:13 - Create template deployment 'createresourcewithoutput'
+VERBOSE: 17:15:18 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is succeeded
+
+DeploymentName          : createresourcewithoutput
+ResourceGroupName       : azure-lab-rg-01
+ProvisioningState       : Succeeded
+Timestamp               : 18-04-2020 11:45:16
+Mode                    : Incremental
+TemplateLink            :
+Parameters              :
+                          Name               Type                       Value
+                          =================  =========================  ==========
+                          mystoragePrefix    String                     azstorage
+                          storageSKU         String                     Standard_LRS
+                          location           String                     centralindia
+
+Outputs                 :
+                          Name               Type                       Value
+                          =================  =========================  ==========
+                          storageEndpoint    Object                     {
+                            "services": {
+                              "file": {
+                                "enabled": true,
+                                "lastEnabledTime": "2020-04-18T11:41:32.0837748Z"
+                              },
+                              "blob": {
+                                "enabled": true,
+                                "lastEnabledTime": "2020-04-18T11:41:32.0837748Z"
+                              }
+                            },
+                            "keySource": "Microsoft.Storage"
+                          }
+                          storageStatus      String                     available
+                          creationTime       String                     18-04-2020 11:41:32
+
+DeploymentDebugLogLevel :
+```
 
 ### <a name="external_parameters_reference"></a>External parameter file usage for resources
