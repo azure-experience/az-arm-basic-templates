@@ -2,16 +2,16 @@
 Brief walkthrough on the ARM templates used by the beginners
 
 ## Index for different user-cases
-### [Brief Introduction _(Before you start)_](#before-we-start)
-### [Resource creation](#new-resource-creation)
-### [Resource creation with parameters](#resource-creation-parameters)
-### [Resource creation with functions](#resource-creation-functions)
-### [Resource creation with variables](#resource-creation-variables)
-### [How to get output for your ARM templates?](#arm-generate-output)
-### [Usage of exported templates](#exported-templates)
-### [Usage of quick start templates](#quick-start-templates)
-### [Resource creation with tags](#resource-creation-tags)
-### [External parameter file usage for resources](#external_parameters_reference)
+### [1. Brief Introduction _(Before you start)_](#before-we-start)
+### [2. Resource creation](#new-resource-creation)
+### [3. Resource creation with parameters](#resource-creation-parameters)
+### [4. Resource creation with functions](#resource-creation-functions)
+### [5. Resource creation with variables](#resource-creation-variables)
+### [6. How to get output for your ARM templates?](#arm-generate-output)
+### [7. Usage of exported templates](#exported-templates)
+### [8. Usage of quick start templates](#quick-start-templates)
+### [9. Resource creation with tags](#resource-creation-tags)
+### [10. External parameter file usage for resources](#external_parameters_reference)
 
 --
 --
@@ -22,7 +22,7 @@ Brief walkthrough on the ARM templates used by the beginners
 --
 
 
-### <a name="before-we-start"></a>Brief Introduction (_Before you start_)
+### <a name="before-we-start"></a>1. Brief Introduction (_Before you start_)
 To push these ARM templates to our Azure environment, we will rely on **PowerShell** & have the following **Azure Subscription details**, ready before we kick-off. 
 
 :memo: Pointer:
@@ -68,7 +68,7 @@ What if: Performing the operation "Creating Deployment" on target "azure-lab-rg-
 
 ```
 
-### <a name="new-resource-creation"></a>Resource creation
+### <a name="new-resource-creation"></a>2. Resource creation
 |Property|Definition|
 |---|---|
 |Folder|[2-resource-creation](./2-resource-creation)|
@@ -101,7 +101,7 @@ Outputs                 :
 DeploymentDebugLogLevel :
 ```
 
-### <a name="resource-creation-parameters"></a>Resource creation with parameters
+### <a name="resource-creation-parameters"></a>3. Resource creation with parameters
 |Property|Definition|
 |---|---|
 |Folder|[3-resource-creation-with-parameter](./3-resource-creation-with-parameter)|
@@ -141,7 +141,7 @@ Outputs                 :
 DeploymentDebugLogLevel :
 ```
 
-### <a name="resource-creation-functions"></a>Resource creation with functions
+### <a name="resource-creation-functions"></a>4. Resource creation with functions
 |Property|Definition|
 |---|---|
 |Folder|[4-resource-creation-with-functions](./4-resource-creation-with-functions)|
@@ -180,7 +180,7 @@ Outputs                 :
 DeploymentDebugLogLevel :
 ```
 
-### <a name="resource-creation-variables"></a>Resource creation with variables
+### <a name="resource-creation-variables"></a>5. Resource creation with variables
 |Property|Definition|
 |---|---|
 |Folder|[5-resource-creation-with-variables](./5-resource-creation-with-variables)|
@@ -220,7 +220,7 @@ Outputs                 :
 DeploymentDebugLogLevel :
 ```
 
-### <a name="arm-generate-output"></a>How to get output for your ARM templates?
+### <a name="arm-generate-output"></a>6. How to get output for your ARM templates?
 |Property|Definition|
 |---|---|
 |Folder|[6-resource-creation-with-output](./6-resource-creation-with-output)|
@@ -279,7 +279,7 @@ Outputs                 :
 DeploymentDebugLogLevel :
 ```
 
-### <a name="exported-templates"></a>Usage of exported templates
+### <a name="exported-templates"></a>7. Usage of exported templates
 |Property|Definition|
 |---|---|
 |Folder|[7-resource-creation-with-exported-template](./7-resource-creation-with-exported-template)|
@@ -364,7 +364,7 @@ Outputs                 :
 DeploymentDebugLogLevel :
 ```
 
-### <a name="quick-start-templates"></a>Usage of quick start templates
+### <a name="quick-start-templates"></a>8. Usage of quick start templates
 |Property|Definition|
 |---|---|
 |Folder|[8-resource-creation-with-quick-template](./8-resource-creation-with-quick-template)|
@@ -422,7 +422,70 @@ Outputs                 :
 DeploymentDebugLogLevel :
 ```
 
-### <a name="resource-creation-tags"></a>Resource creation with tags
+### <a name="resource-creation-tags"></a>9. Resource creation with tags
+|Property|Definition|
+|---|---|
+|Folder|[9-resource-creation-with-tags](./9-resource-creation-with-tags)|
+|File|_azuredeploy.json_|
+
+Creation of tags is a very important step to "group or cluster" your AZ resources. It can help you keep an eye on the cost & also various departments to which that resource could be allocated.
+
+The below command helps to create both the **storage account & a web-site** simultaneously with **the tags defined** in the template file
+
+**Command:**
+```
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\9-resource-creation-with-tags> New-AzResourceGroupDeployment \
+-Name "createresourcewithtags" -ResourceGroupName "azure-lab-rg-01" -mystoragePrefix "azstorage" \
+-TemplateFile .\azuredeploy.json -Verbose
+```
+
+**Output:**
+```
+VERBOSE: Performing the operation "Creating Deployment" on target "azure-lab-rg-01".
+VERBOSE: 17:42:07 - Template is valid.
+VERBOSE: 17:42:09 - Create template deployment 'createresourcewithtags'
+VERBOSE: 17:42:14 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is running
+VERBOSE: 17:42:32 - Resource Microsoft.Web/serverfarms 'exampleplan' provisioning status is succeeded
+VERBOSE: 17:42:44 - Resource Microsoft.Web/sites 'demoappbxmueijtaz47c' provisioning status is succeeded
+VERBOSE: 17:50:42 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is succeeded
+
+
+DeploymentName          : createresourcewithtags
+ResourceGroupName       : azure-lab-rg-01
+ProvisioningState       : Succeeded
+Timestamp               : 18-04-2020 12:20:38
+Mode                    : Incremental
+TemplateLink            :
+Parameters              :
+                          Name                  Type                       Value
+                          ====================  =========================  ==========
+                          mystoragePrefix       String                     azstorage
+                          storageSKU            String                     Standard_LRS
+                          location              String                     southindia
+                          appServicePlanName    String                     exampleplan
+                          webAppName            String                     demoapp
+                          linuxFxVersion        String                     php|7.0
+                          resourceTags          Object                     {
+                            "environment": "dev",
+                            "lab-simulation": "arm-template-creation"
+                          }
+
+Outputs                 :
+                          Name               Type                       Value
+                          =================  =========================  ==========
+                          storageEndpoint    Object                     {
+                            "dfs": "https://azstoragebxmueijtaz47c.dfs.core.windows.net/",
+                            "web": "https://azstoragebxmueijtaz47c.z30.web.core.windows.net/",
+                            "blob": "https://azstoragebxmueijtaz47c.blob.core.windows.net/",
+                            "queue": "https://azstoragebxmueijtaz47c.queue.core.windows.net/",
+                            "table": "https://azstoragebxmueijtaz47c.table.core.windows.net/",
+                            "file": "https://azstoragebxmueijtaz47c.file.core.windows.net/"
+                          }
+
+DeploymentDebugLogLevel :
+```
+
+### <a name="resource-creation-tags"></a>10. Resource creation with tags
 |Property|Definition|
 |---|---|
 |Folder|[9-resource-creation-with-tags](./9-resource-creation-with-tags)|
