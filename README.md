@@ -5,7 +5,7 @@ Brief walkthrough on the ARM templates used by the beginners
 ### [Brief Introduction _(Before you start)_](#before-we-start)
 ### [Resource creation](#new-resource-creation)
 ### [Resource creation with parameters](#resource-creation-parameters)
-### Creation of a resource using functions
+### [Resource creation with functions](#resource-creation-functions)
 ### Creation of a resource using variables
 ### How to get output for your ARM templates?
 ### Usage of exported templates
@@ -87,13 +87,8 @@ PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\2-resource-creation> New
 VERBOSE: Performing the operation "Creating Deployment" on target "azure-lab-rg-01".
 VERBOSE: 16:53:23 - Template is valid.
 VERBOSE: 16:53:26 - Create template deployment 'createresource'
-VERBOSE: 16:53:26 - Checking deployment status in 5 seconds
-VERBOSE: 16:53:31 - Checking deployment status in 5 seconds
 VERBOSE: 16:53:37 - Resource Microsoft.Storage/storageAccounts 'storageaccountvsc012' provisioning status is running
-VERBOSE: 16:53:37 - Checking deployment status in 14 seconds
-VERBOSE: 16:53:51 - Checking deployment status in 5 seconds
 VERBOSE: 16:53:57 - Resource Microsoft.Storage/storageAccounts 'storageaccountvsc012' provisioning status is succeeded
-
 
 DeploymentName          : createresource
 ResourceGroupName       : azure-lab-rg-01
@@ -112,7 +107,6 @@ DeploymentDebugLogLevel :
 |Folder|[3-resource-creation-with-parameter](./3-resource-creation-with-parameter)|
 |File|_azuredeploy-with-config-params.json_|
 
-azuredeploy-with-config-params.json
 Run this command to create a simple **storageaccount** by using a custom file: _azuredeploy-with-config-params.json_, where you are defining a few parameters for resource creation (ex: _account name, sku, location_)
 
 **Command:**
@@ -127,12 +121,8 @@ PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\3-resource-creation-with
 VERBOSE: Performing the operation "Creating Deployment" on target "azure-lab-rg-01".
 VERBOSE: 16:59:10 - Template is valid.
 VERBOSE: 16:59:12 - Create template deployment 'resourcewithparameter'
-VERBOSE: 16:59:12 - Checking deployment status in 5 seconds
 VERBOSE: 16:59:18 - Resource Microsoft.Storage/storageAccounts 'vscstorageaccount0123' provisioning status is running
-VERBOSE: 16:59:18 - Checking deployment status in 17 seconds
-VERBOSE: 16:59:35 - Checking deployment status in 5 seconds
 VERBOSE: 16:59:41 - Resource Microsoft.Storage/storageAccounts 'vscstorageaccount0123' provisioning status is succeeded
-
 
 DeploymentName          : resourcewithparameter
 ResourceGroupName       : azure-lab-rg-01
@@ -146,6 +136,45 @@ Parameters              :
                           storageName      String                     vscstorageaccount0123
                           storageSKU       String                     Standard_LRS
                           location         String                     southindia
+
+Outputs                 :
+DeploymentDebugLogLevel :
+```
+
+### <a name="resource-creation-functions"></a>Resource creation with functions
+|Property|Definition|
+|---|---|
+|Folder|[4-resource-creation-with-functions](./4-resource-creation-with-functions)|
+|File|_azuredeploy.json_|
+
+Run this command to create a simple **storageaccount** by using in-built ARM functions (in this example: _"resourceGroup().location"_) to automatically deduce the location of storage account based on resource group's location
+
+**Command:**
+```
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\4-resource-creation-with-functions> New-AzResourceGroupDeployment \
+-Name "createresourcewithfunctions" -ResourceGroupName "azure-lab-rg-01"  -TemplateFile .\azuredeploy.json -verbose
+```
+
+**Output:**
+```
+VERBOSE: Performing the operation "Creating Deployment" on target "azure-lab-rg-01".
+VERBOSE: 17:05:34 - Template is valid.
+VERBOSE: 17:05:36 - Create template deployment 'createresourcewithfunctions'
+VERBOSE: 17:05:41 - Resource Microsoft.Storage/storageAccounts 'vscstorageaccount0123' provisioning status is running
+VERBOSE: 17:06:03 - Resource Microsoft.Storage/storageAccounts 'vscstorageaccount0123' provisioning status is succeeded
+
+DeploymentName          : createresourcewithfunctions
+ResourceGroupName       : azure-lab-rg-01
+ProvisioningState       : Succeeded
+Timestamp               : 18-04-2020 11:36:03
+Mode                    : Incremental
+TemplateLink            :
+Parameters              :
+                          Name             Type                       Value
+                          ===============  =========================  ==========
+                          storageName      String                     vscstorageaccount0123
+                          storageSKU       String                     Standard_LRS
+                          location         String                     centralindia
 
 Outputs                 :
 DeploymentDebugLogLevel :
