@@ -8,7 +8,7 @@ Brief walkthrough on the ARM templates used by the beginners
 ### [Resource creation with functions](#resource-creation-functions)
 ### [Resource creation with variables](#resource-creation-variables)
 ### [How to get output for your ARM templates?](#arm-generate-output)
-### Usage of exported templates
+### [Usage of exported templates](#exported-templates)
 ### Usage of quick start templates
 ### Resource creation with tags
 ### [External parameter file usage for resources](#external_parameters_reference)
@@ -275,6 +275,91 @@ Outputs                 :
                           }
                           storageStatus      String                     available
                           creationTime       String                     18-04-2020 11:41:32
+
+DeploymentDebugLogLevel :
+```
+
+### <a name="exported-templates"></a>Usage of exported templates
+|Property|Definition|
+|---|---|
+|Folder|[7-resource-creation-with-exported-template](./7-resource-creation-with-exported-template)|
+|File|_azuredeploy-converged.json_|
+
+We can create a AZ resource in the UI, and later export the template to create another resource from the ARM templates.
+
+The below command helps to create both the **storage account & a virtual network** simultaneously
+
+**Command:**
+```
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\7-resource-creation-with-exported-template> New-AzResourceGroupDeployment \
+-Name "createresourcewithexportedtemplate" -ResourceGroupName "azure-lab-rg-01" -mystoragePrefix "azstorage" \
+-TemplateFile .\azuredeploy-converged.json -Verbose
+```
+
+**Output:**
+```
+VERBOSE: Performing the operation "Creating Deployment" on target "azure-lab-rg-01".
+VERBOSE: 17:30:27 - Template is valid.
+VERBOSE: 17:30:30 - Create template deployment 'createresourcewithexportedtemplate'
+VERBOSE: 17:30:35 - Resource Microsoft.Network/virtualNetworks 'az-lab-vnet-creation' provisioning status is running
+VERBOSE: 17:30:51 - Resource Microsoft.Network/virtualNetworks/subnets 'az-lab-vnet-creation/subnetA' provisioning status is succeeded
+VERBOSE: 17:30:51 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is running
+VERBOSE: 17:30:51 - Resource Microsoft.Network/virtualNetworks 'az-lab-vnet-creation' provisioning status is succeeded
+VERBOSE: 17:30:56 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is succeeded
+
+DeploymentName          : createresourcewithexportedtemplate
+ResourceGroupName       : azure-lab-rg-01
+ProvisioningState       : Succeeded
+Timestamp               : 18-04-2020 12:00:55
+Mode                    : Incremental
+TemplateLink            :
+Parameters              :
+                          Name               Type                       Value
+                          =================  =========================  ==========
+                          mystoragePrefix    String                     azstorage
+                          storageSKU         String                     Standard_LRS
+                          location           String                     centralindia
+                          vnet_name          String                     az-lab-vnet-creation
+
+Outputs                 :
+                          Name               Type                       Value
+                          =================  =========================  ==========
+                          storageEndpoint    Object                     {
+                            "services": {
+                              "file": {
+                                "enabled": true,
+                                "lastEnabledTime": "2020-04-18T12:00:34.5706322Z"
+                              },
+                              "blob": {
+                                "enabled": true,
+                                "lastEnabledTime": "2020-04-18T12:00:34.5706322Z"
+                              }
+                            },
+                            "keySource": "Microsoft.Storage"
+                          }
+                          storageStatus      String                     available
+                          creationTime       String                     18-04-2020 12:00:34
+                          vnetAddrSpace      Object                     {
+                            "addressPrefixes": [
+                              "10.5.0.0/16"
+                            ]
+                          }
+                          vnetSubnet         Array                      [
+                            {
+                              "name": "subnetA",
+                              "id": "/subscriptions/2f981ee7-6c60-4593-bc4b-82c9b050f722/resourceGroups/azure-lab-rg-01/providers/Microsoft.Network/virtualNetworks/az-lab-vnet-creation/subnets/subnetA",
+                              "etag": "W/\"b029fb02-74c2-4fc5-a750-09043c43e2df\"",
+                              "properties": {
+                                "provisioningState": "Succeeded",
+                                "addressPrefix": "10.5.0.0/24",
+                                "delegations": [],
+                                "privateEndpointNetworkPolicies": "Enabled",
+                                "privateLinkServiceNetworkPolicies": "Enabled"
+                              },
+                              "type": "Microsoft.Network/virtualNetworks/subnets"
+                            }
+                          ]
+                          vnetPeeringInfo    Array                      []
 
 DeploymentDebugLogLevel :
 ```
