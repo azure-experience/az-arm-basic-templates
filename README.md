@@ -6,7 +6,7 @@ Brief walkthrough on the ARM templates used by the beginners
 ### [Resource creation](#new-resource-creation)
 ### [Resource creation with parameters](#resource-creation-parameters)
 ### [Resource creation with functions](#resource-creation-functions)
-### Creation of a resource using variables
+### [Resource creation with variables](#resource-creation-variables)
 ### How to get output for your ARM templates?
 ### Usage of exported templates
 ### Usage of quick start templates
@@ -180,6 +180,45 @@ Outputs                 :
 DeploymentDebugLogLevel :
 ```
 
+### <a name="resource-creation-variables"></a>Resource creation with variables
+|Property|Definition|
+|---|---|
+|Folder|[5-resource-creation-with-variables](./5-resource-creation-with-variables)|
+|File|_azuredeploy.json_|
+
+Run this command to create a simple **storageaccount** by using a custom input flag: _myStoragePrefix_, which is defined as a variable within the json file. This command is useful when you wish to (externally) inject custom flags for your resources
+
+**Command:**
+```
+PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\5-resource-creation-with-variables> New-AzResourceGroupDeployment \
+-Name "createresourcewithvariables" -ResourceGroupName "azure-lab-rg-01" -mystoragePrefix "azstorage" \
+-TemplateFile .\azuredeploy.json -Verbose
+```
+
+**Output:**
+```
+VERBOSE: Performing the operation "Creating Deployment" on target "azure-lab-rg-01".
+VERBOSE: 17:11:25 - Template is valid.
+VERBOSE: 17:11:27 - Create template deployment 'createresourcewithvariables'
+VERBOSE: 17:11:37 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is running
+VERBOSE: 17:12:02 - Resource Microsoft.Storage/storageAccounts 'azstoragebxmueijtaz47c' provisioning status is succeeded
+
+DeploymentName          : createresourcewithvariables
+ResourceGroupName       : azure-lab-rg-01
+ProvisioningState       : Succeeded
+Timestamp               : 18-04-2020 11:41:58
+Mode                    : Incremental
+TemplateLink            :
+Parameters              :
+                          Name               Type                       Value
+                          =================  =========================  ==========
+                          mystoragePrefix    String                     azstorage
+                          storageSKU         String                     Standard_LRS
+                          location           String                     centralindia
+
+Outputs                 :
+DeploymentDebugLogLevel :
+```
 
 
 ### <a name="external_parameters_reference"></a>External parameter file usage for resources
