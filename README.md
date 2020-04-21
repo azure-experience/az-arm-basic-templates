@@ -125,12 +125,13 @@ Run this command to create a simple **storageaccount** by using a custom file: _
        "Standard_RAGZRS"
      ]
    },
-   ...
-  /* resource definition */
-   "sku": {
-       "name": "[parameters('storageSKU')]" 
-     },
-   ```
+  
+/* resource definition */
+...
+  "sku": {
+      "name": "[parameters('storageSKU')]" 
+    },
+```
 
 **Command:**
 ```
