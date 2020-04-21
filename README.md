@@ -124,7 +124,7 @@ Run this command to create a simple **storageaccount** by using a custom file: _
        "Standard_GZRS",
        "Standard_RAGZRS"
      ]
-   },
+}
   
 /* resource definition */
 ...
@@ -172,6 +172,20 @@ DeploymentDebugLogLevel :
 |File|_azuredeploy.json_|
 
 Run this command to create a simple **storageaccount** by using in-built ARM functions (in this example: _"resourceGroup().location"_) to automatically deduce the location of storage account based on resource group's location
+
+**Extract from the json file:**
+```
+/* parameter definition */
+"location": {
+     "type": "string",
+     "defaultValue": "[resourceGroup().location]",
+     "allowedValues": [
+       "southindia",
+       "centralindia",
+       "westindia"
+     ]
+}
+```
 
 **Command:**
 ```
