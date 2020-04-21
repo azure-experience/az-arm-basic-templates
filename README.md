@@ -1,7 +1,7 @@
 # az-arm-basic-templates
 Brief walkthrough on the ARM templates used by the beginners
 
-## Index for different user-cases
+## Index for different use-cases
 ### [1. Brief Introduction _(Before you start)_](#before-we-start)
 ### [2. Resource creation](#new-resource-creation)
 ### [3. Resource creation with parameters](#resource-creation-parameters)
