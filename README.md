@@ -491,7 +491,9 @@ DeploymentDebugLogLevel :
 |Folder|[8-resource-creation-with-quick-template](./8-resource-creation-with-quick-template)|
 |File|_azuredeploy.json_|
 
-We can always rely on the "quick-start" templated already provided for Azure resources (within github). It could save you a lot of configuration time and speed up new resource creation of any flavor.
+We can always rely on the ["quick-start" templates](https://github.com/Azure/azure-quickstart-templates) already provided for Azure resources (within github). It could save you a lot of configuration time and speed up new resource creation for any az service
+
+![](imgs/a-github-quick-start-az-templates.png)
 
 The below command helps to create both the **storage account & a web-site** simultaneously
 
