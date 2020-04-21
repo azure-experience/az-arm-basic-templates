@@ -124,6 +124,10 @@ Run this command to create a simple **storageaccount** by using a custom file: _
        "Standard_RAGZRS"
      ]
    },
+   ...
+   "sku": {
+       "name": "[parameters('storageSKU')]" 
+     },
    ```
 
 **Command:**
