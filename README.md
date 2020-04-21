@@ -114,6 +114,7 @@ Run this command to create a simple **storageaccount** by using a custom file: _
 
 **Extract from the json file:**
 ```
+/* parameter definition */
 "storageSKU": {
      "type": "string",
      "defaultValue": "Standard_LRS",
@@ -125,6 +126,7 @@ Run this command to create a simple **storageaccount** by using a custom file: _
      ]
    },
    ...
+  /* resource definition */
    "sku": {
        "name": "[parameters('storageSKU')]" 
      },
