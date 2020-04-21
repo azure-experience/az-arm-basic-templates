@@ -225,7 +225,33 @@ DeploymentDebugLogLevel :
 |Folder|[5-resource-creation-with-variables](./5-resource-creation-with-variables)|
 |File|_azuredeploy.json_|
 
-Run this command to create a simple **storageaccount** by using a custom input flag: _myStoragePrefix_, which is defined as a variable within the json file. This command is useful when you wish to (externally) inject custom flags for your resources
+Run this command to create a simple **storageaccount** by using a custom input flag: _myStoragePrefix_, which is defined as a variable within the json file. This command is useful when you wish to (externally) inject custom flags (with custom names of course!) for your resources
+
+```
+/* parameter definition */
+"parameters": {
+   "mystoragePrefix": {
+     "type": "string",
+     "minLength": 2,
+     "maxLength": 10
+     },
+...     
+
+/* variable definition */
+...
+"variables": {
+    "uniqueStorageName": "[concat(parameters('mystoragePrefix'), uniqueString(resourceGroup().id))]"
+ }
+
+/* resource definition */
+...
+"resources": [
+   {
+     "type": "Microsoft.Storage/storageAccounts",
+     "apiVersion": "2019-04-01",
+     "name": "[variables('uniqueStorageName')]",
+...
+```
 
 **Command:**
 ```
