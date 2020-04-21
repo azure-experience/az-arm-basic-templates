@@ -112,6 +112,20 @@ DeploymentDebugLogLevel :
 
 Run this command to create a simple **storageaccount** by using a custom file: _azuredeploy-with-config-params.json_, where you are defining a few parameters for resource creation (ex: _account name, sku, location_)
 
+**Extract from the json file:**
+```
+"storageSKU": {
+     "type": "string",
+     "defaultValue": "Standard_LRS",
+     "allowedValues": [
+       "Standard_LRS",
+       "Standard_GRS",
+       "Standard_GZRS",
+       "Standard_RAGZRS"
+     ]
+   },
+   ```
+
 **Command:**
 ```
 PS C:\Users\nagarjun k\Documents\az-journey\arm\a-basic\3-resource-creation-with-parameter> 
