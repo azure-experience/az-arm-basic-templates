@@ -553,6 +553,39 @@ DeploymentDebugLogLevel :
 
 Creation of tags is a very important step to "group or cluster" your AZ resources. It can help you keep an eye on the cost & also various departments to which that resource could be allocated.
 
+**Extract from the json file:**
+```
+/* parameter definition */
+...
+"resourceTags": {
+    "type": "object",
+    "defaultValue": {
+        "environment": "dev",
+        "lab-simulation": "arm-template-creation"
+    }
+}
+...
+
+/* resource definition */
+...
+"resources": [
+   {
+     "type": "Microsoft.Storage/storageAccounts",
+     "apiVersion": "2019-04-01",
+     "name": "[variables('uniqueStorageName')]",
+     "tags": "[parameters('resourceTags')]",
+     "location": "[parameters('location')]",
+     "sku": {
+       "name": "[parameters('storageSKU')]"
+     },
+     "kind": "StorageV2",
+     "properties": {
+       "supportsHttpsTrafficOnly": true
+     }
+   },
+...    
+```
+
 The below command helps to create both the **storage account & a web-site** simultaneously with **the tags defined** in the template file
 
 **Command:**
@@ -616,6 +649,8 @@ DeploymentDebugLogLevel :
 |ParameterFile|_azuredeploy.parameters.dev.json_|
 
 Sometimes it becomes necessary to create multiple AZ resources for different environments. To bring the element of re-usability, we can externalize the parameters (based on environments) & inject them as reference during resource creation
+
+![](imgs/b-external-parameters-file-usage.png)
 
 The below command helps to create both the **storage account & a web-site** simultaneously with **the template parameterfile for dev** environment
 
