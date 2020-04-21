@@ -115,6 +115,7 @@ Run this command to create a simple **storageaccount** by using a custom file: _
 **Extract from the json file:**
 ```
 /* parameter definition */
+...
 "storageSKU": {
      "type": "string",
      "defaultValue": "Standard_LRS",
@@ -124,13 +125,15 @@ Run this command to create a simple **storageaccount** by using a custom file: _
        "Standard_GZRS",
        "Standard_RAGZRS"
      ]
-}
-  
+},
+...
+
 /* resource definition */
 ...
   "sku": {
       "name": "[parameters('storageSKU')]" 
     },
+...    
 ```
 
 **Command:**
@@ -176,6 +179,7 @@ Run this command to create a simple **storageaccount** by using in-built ARM fun
 **Extract from the json file:**
 ```
 /* parameter definition */
+...
 "location": {
      "type": "string",
      "defaultValue": "[resourceGroup().location]",
@@ -184,7 +188,8 @@ Run this command to create a simple **storageaccount** by using in-built ARM fun
        "centralindia",
        "westindia"
      ]
-}
+},
+...
 ```
 
 **Command:**
@@ -229,19 +234,21 @@ Run this command to create a simple **storageaccount** by using a custom input f
 
 ```
 /* parameter definition */
+...
 "parameters": {
    "mystoragePrefix": {
      "type": "string",
      "minLength": 2,
      "maxLength": 10
-     },
+   },
 ...     
 
 /* variable definition */
 ...
 "variables": {
     "uniqueStorageName": "[concat(parameters('mystoragePrefix'), uniqueString(resourceGroup().id))]"
- }
+}
+...
 
 /* resource definition */
 ...
@@ -292,6 +299,21 @@ DeploymentDebugLogLevel :
 |File|_azuredeploy.json_|
 
 Sometimes it becomes imperative to know the properties of the resources being created. Hence its essential to generate output & identify the associated properties with the AZ resources. 
+
+**Extract from the json file:**
+```
+/* parameter definition */
+...
+ "outputs": {
+   "storageEndpoint":{
+      "type": "object",
+      /* "value": "[reference(variables('uniqueStorageName'))]" ==> this gives the complete output \
+                  from storage account creation; you need to capture one output pertaining to object type
+         "value": "[reference(variables('uniqueStorageName')).primaryEndpoints]" */
+      "value": "[reference(variables('uniqueStorageName')).encryption]"
+   },
+...
+```
 
 The below command helps to create output associated with your storage account.(ex: _encryption, status & storage time_)
 
