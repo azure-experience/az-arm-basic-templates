@@ -374,6 +374,40 @@ DeploymentDebugLogLevel :
 
 We can create a AZ resource in the UI, and later export the template to create another resource from the ARM templates.
 
+**Extract from the json file:**
+```
+/* multiple resource definition */
+...
+"resources": [
+   {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2019-04-01",
+      "name": "[variables('uniqueStorageName')]",
+      "tags": {"location": "[parameters('location')]"},
+      "location": "[parameters('location')]",
+      "sku": {
+         "name": "[parameters('storageSKU')]" 
+      },
+      "kind": "StorageV2",
+      "properties": {
+         "supportsHttpsTrafficOnly": true
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2019-11-01",
+      "name": "[variables('vnetName')]",
+      "tags": {"location": "[parameters('location')]"},
+      "location": "[parameters('location')]",
+      "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+                "10.5.0.0/16"
+            ]
+          },
+...
+```
+
 The below command helps to create both the **storage account & a virtual network** simultaneously
 
 **Command:**
