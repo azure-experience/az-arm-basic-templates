@@ -87,6 +87,20 @@ What if: Performing the operation "Creating Deployment" on target "azure-lab-rg-
 
 ```
 
+### <a name="key-terminologies"></a>1(a). Key Terminologies
+Here are the key terminologies you need to be aware of in the world of ARM
+|Property|Definition|
+|---|---|
+|**_ARM templates_**|Declarative syntax presented in **JSON format** to structure the flow for Azure resource creation|
+|**_ARM_**|A short abbreviated form for **Azure Resource Manager**, which is a service to manage the ARM templates within Azure|
+|**_parameters_**|Provides **values during deployment** that allows the same template to be used with different environment|
+|**_variables_**|Defines the **"re-usable" values within the ARM template**; these can be constructed from _parameters_ values|
+|**_functions_**|**computation-based expressions** that are used within ARM template (ex: _concat, uniqueString_, etc)|
+|**_resources_**|declare the **Az Resource** that needs to be created/deployed (ex: _vnet, vm, storageAccount,_ etc)|
+|**_outputs_**|returns the **values from the newly created/deployed resources;** Type includes: **string, object, array**|
+
+For a more "finer precision" **pertaining to the elements involved within ARM templates**, please dont hesitate to review the [ARM template reference document](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-expressions).
+
 ### <a name="new-resource-creation"></a>2. Resource creation
 |Property|Definition|
 |---|---|
