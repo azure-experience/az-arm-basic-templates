@@ -1,11 +1,11 @@
 # az-arm-basic-templates
 A very basic & detailed walkthrough on the **ARM templates, used with Azure Resource Manager & PowerShell**. It includes
 
-1. what are the essential elements that make up an ARM template?
+1. what are the **essential elements** that make up an ARM template?
 
-2. how to create a simple az resource by using any of these elements (hint: _parameters, variables, functions_)?
+2. how to **create a simple az resource** by using any of these elements (hint: _parameters, variables, functions_)?
 
-3. how to build templates agnostic to multi-environments (hint: _dev,int, uat, prd_)?
+3. how to **build templates agnostic to multi-environments** (hint: _dev,int, uat, prd_)?
 
 :mega: **Key Assumption(s) at this point:**
 
