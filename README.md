@@ -92,7 +92,7 @@ Here are the key terminologies you need to be aware of in the world of ARM
 |Property|Definition|
 |---|---|
 |**_ARM templates_**|Declarative syntax presented in **JSON format** to structure the flow for Azure resource creation|
-|**_ARM_**|A short abbreviated form for **Azure Resource Manager**, which is a service to manage the ARM templates within Azure|
+|**_ARM_**|A short abbreviated form for **Azure Resource Manager**, which is a service to manage the lifecycle of ARM templates within Azure|
 |**_parameters_**|Provides **values during deployment** that allows the same template to be used with different environment|
 |**_variables_**|Defines the **"re-usable" values within the ARM template**; these can be constructed from _parameters_ values|
 |**_functions_**|**computation-based expressions** that are used within ARM template (ex: _concat, uniqueString_, etc)|
