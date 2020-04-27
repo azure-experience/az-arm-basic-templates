@@ -9,7 +9,7 @@ A very basic & detailed walkthrough on the **ARM templates, used with Azure Reso
 
 :mega: **Key Assumption(s) at this point:**
 
-a. This course is built on usage of declarative syntax &^ assumes that **you are aware of construction syntax within a JSON file**. If you are not aware, then please dont hesitate to take a quick glance at the [Azure Resource Manager intro page](https://docs.microsoft.com/en-in/azure/azure-resource-manager/management/overview)
+a. This course is built on usage of declarative syntax & assumes that **you are aware of construction syntax within a JSON file**. If you are not aware, then please dont hesitate to take a quick glance at the [Azure Resource Manager intro page](https://docs.microsoft.com/en-in/azure/azure-resource-manager/management/overview)
 
 b. It also assumes that you have basic capability on **Windows PowerShell**, and esp on the **subscription/environ related az cmdlets** (ex: _get-azsubscription, get-azcontext, set-azcontext, etc_)
 
@@ -19,6 +19,7 @@ Hope this course gives you the much needed info you are looking for :smiley:
 
 ## Index for different use-cases
 ### [1. Brief Introduction _(Before you start)_](#before-we-start)
+#### [1(a). Key Terminologies](#key-terminologies)
 ### [2. Resource creation](#new-resource-creation)
 ### [3. Resource creation with parameters](#resource-creation-parameters)
 ### [4. Resource creation with functions](#resource-creation-functions)
